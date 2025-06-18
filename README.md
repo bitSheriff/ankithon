@@ -1,8 +1,8 @@
-# md2anki
+# Ankithon
 
 Convert markdown documents to [anki](https://apps.ankiweb.net/) flashcards with this simple python script. 
 
-Powered by [python-markdown2](https://github.com/trentm/python-markdown2) and [genanki](https://github.com/kerrickstaley/genanki).
+This fork is powered by [python-markdown2](https://github.com/trentm/python-markdown2) and [genanki](https://github.com/kerrickstaley/genanki) all with the usage of `uv`
 
 ## Features
 
