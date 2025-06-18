@@ -19,7 +19,8 @@ This fork is powered by [python-markdown2](https://github.com/trentm/python-mark
 
 ## Usage
 
-```
+```sh
+uv sync # one time to install the dependencies
 uv run main.py .\example\example.md
 ```
 
