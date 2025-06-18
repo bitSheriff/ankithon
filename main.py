@@ -101,7 +101,7 @@ class CardData:
     return self.title[4:].strip()
     
   def get_title_md(self):
-    return self.title + '\n*' + self.get_domain_plain(1) + ' - #' + str(self.lvl_id) + '*'
+    return self.title
   
   def get_domain_plain(self, d):
     return self.domain[d][(d+2):].strip()
