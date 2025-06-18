@@ -15,6 +15,7 @@ This fork is powered by [python-markdown2](https://github.com/trentm/python-mark
     - Bullet Lists
     - Numbered Lists ...
 - Style flashcards with CSS
+- *Dynamic Sub-Decks*: the number of subdecks is dynamical -> the lowerst heading is the question, all above are levels of subdecks.
 
 ## Usage
 
@@ -99,6 +100,18 @@ Into this:
 ![](misc/0.png)
 
 More examples in the `example/` directory of this repository.
+
+### Dynamic Deck Levels
+
+```md
+# Deck
+## Sub Deck
+### Sub Sub Deck
+#### A card question?
+An answer!
+```
+
+The program will detect the lowest level, which is then taken as the *question*. All other levels will get turned into sub-decks. Please note that the heading where the question is has to be the same through the whole file. 
 
 ## CSS styling.
 
