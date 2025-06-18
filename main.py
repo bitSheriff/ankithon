@@ -40,7 +40,7 @@ def main():
     strip_answers(src_file, dst_file, args.questions)
     return
 
-  
+
   dst_file = fbase + '.apkg'
 
   style = ''
@@ -65,7 +65,7 @@ def main():
   print('Output: \''+ dst_file+'\'')
   if (len(style) > 0):
     print('Using style: \''+style_path+'\'')
-  Md2Anki().process(src_file, dst_file, fbase, fbase_dir, style)
+  Transformer().process(src_file, dst_file, fbase, fbase_dir, style)
 
 
 def make_model(style):
@@ -99,10 +99,10 @@ class CardData:
 
   def get_title_plain(self):
     return self.title[4:].strip()
-    
+
   def get_title_md(self):
     return self.title
-  
+
   def get_domain_plain(self, d):
     return self.domain[d][(d+2):].strip()
 
@@ -114,7 +114,7 @@ class CardData:
     else:
       return self.get_domain_plain(0)
 
-class Md2Anki:
+class Transformer:
   all_decks = []
   deck = None
   model = None
@@ -183,7 +183,7 @@ class Md2Anki:
 
     self.all_decks.append(self.deck)
     print('Added', ccounter, 'cards with',self.img_counter,'images in',len(self.all_decks),'decks.')
-    
+
 
   def md_make_card(self, card):
 
@@ -274,7 +274,7 @@ def compile_html(src_file, dst_file, fbase, fbase_dir, style_path):
 
     buff_ctxt += mymd[buff:img.start()] + blob
     buff = img.end()
-    
+
   buff_ctxt += mymd[buff:len(mymd)]
   mymd = buff_ctxt
 
