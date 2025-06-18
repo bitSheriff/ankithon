@@ -90,7 +90,7 @@ def make_model(style):
     ], css=style)
 
 
-class CardData:
+class Card:
   txt = ''
   title = ''
   level = -1
@@ -146,7 +146,7 @@ class Transformer:
       os.makedirs(self.mediadir)
 
     ccounter = 0
-    card = CardData()
+    card = Card()
     card.domain[0] = '# ' + self.fbase
     with open(src_file, 'r', encoding='utf-8') as myfile:
       for line in myfile:
