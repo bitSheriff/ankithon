@@ -15,13 +15,13 @@ This fork is powered by [python-markdown2](https://github.com/trentm/python-mark
 ## Usage
 
 ```
-python md2anki.py .\example\example.md
+uv run main.py .\example\example.md
 ```
 
 Other:
 
 ```
-usage: md2anki.py [-h] [-o OUTPUT] [-s STYLE] INPUT
+usage: uv run main.py [-h] [-o OUTPUT] [-s STYLE] INPUT
 
 Convert markdown to anki deck.
 
@@ -91,7 +91,3 @@ CSS can be added using the `-s PATH/TO/STYLE.css` parameter.
 CSS with the filename `style.css` in the same folder as the markdown file will be applied automatically.
 
 Most markdown CSS should work as expected. For example this [github markdown](https://github.com/sindresorhus/github-markdown-css).
-
-## Notes
-
-I created this for personal use, the code is quite messy but works well. Only tested under windows. Feel free to send me PRs or questions.
