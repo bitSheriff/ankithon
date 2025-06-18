@@ -10,6 +10,8 @@ This fork is powered by [python-markdown2](https://github.com/trentm/python-mark
 - Markdown image size specifiers
 - Tables
 - All the basic markdown syntax
+    - Bullet Lists
+    - Numbered Lists ...
 - Style flashcards with CSS
 
 ## Usage
@@ -40,7 +42,9 @@ optional arguments:
 
 ## Dependencies
 
-`md2anki` depends on `markdown2` and `genanki`.
+`ankithon` depends on `markdown2` and `genanki`. Which is managed with `uv`, this tool can be installed [with this simple method](https://docs.astral.sh/uv/getting-started/installation/).
+
+If you don't want to use `uv` (which is recommended) you can install them with `pip`
 
 ```
 pip install genanki
