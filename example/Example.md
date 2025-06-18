@@ -41,6 +41,6 @@ Yes it does!
 - Example B
 
 ### Numbered Lists?
-1) Example A
-2) Example B
-3) Example C
+1. Example A
+2. Example B
+3. Example C
