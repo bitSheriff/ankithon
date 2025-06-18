@@ -77,6 +77,15 @@ Another answer... _With an image!_
 | This    | is | great!   |
 | This    | is | amazing! |
 | This    | is | ok!      |
+
+### Bullet-Points?
+- Example A
+- Example B
+
+### Numbered Lists?
+1. Example A
+2. Example B
+3. Example C
 ```
 
 Into this:
