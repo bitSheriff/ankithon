@@ -38,14 +38,14 @@ def main():
     fbase_dir += '/'
 
   if args.questions >= 0:
-    dst_file = fbase + '_questions.md'
+    dst_file = fbase_dir + fbase + '_questions.md'
     if args.output is not None:
       dst_file = args.output
     Transformer().strip_answers(src_file, dst_file, args.questions)
     return
 
 
-  dst_file = fbase + '.apkg'
+  dst_file = fbase_dir + fbase + '.apkg'
 
   style = ''
   style_path = fbase_dir+'style.css'
@@ -56,7 +56,7 @@ def main():
     style_path = args.style
 
   if args.web:
-    dst_file = fbase + '.html'
+    dst_file = fbase_dir + fbase + '.html'
     if args.output is not None:
       dst_file = args.output
     compile_html(src_file, dst_file, fbase, fbase_dir, style_path)
