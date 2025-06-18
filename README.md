@@ -101,6 +101,18 @@ Into this:
 
 More examples in the `example/` directory of this repository.
 
+### Dynamic Deck Levels
+
+```md
+# Deck
+## Sub Deck
+### Sub Sub Deck
+#### A card question?
+An answer!
+```
+
+The program will detect the lowest level, which is then taken as the *question*. All other levels will get turned into sub-decks. Please note that the heading where the question is has to be the same through the whole file. 
+
 ## CSS styling.
 
 CSS can be added using the `-s PATH/TO/STYLE.css` parameter.
