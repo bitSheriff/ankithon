@@ -3,7 +3,7 @@ class Card:
   txt = ''
   title = ''
   level = -1
-  domain = ['', '', '']
+  domain = ['', '', '', '', '', '']
   lvl_id = 0
 
   def get_title_plain(self):

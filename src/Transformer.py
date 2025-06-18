@@ -41,12 +41,12 @@ class Transformer:
     ccounter = 0
     card = Card()
     card.domain[0] = '# ' + self.fbase
+    max_level = (src_file)
     with open(src_file, 'r', encoding='utf-8') as myfile:
       for line in myfile:
         h = h_level(line)
         if h > 0:  # new card start
-          if card.level == 3 and ccounter > 0:  # make old card
-            #print('New card: ' + card.get_title_plain())
+          if card.level == max_level and ccounter > 0:  # make old card
             self.md_make_card(card)
 
           # setup new card
@@ -147,11 +147,21 @@ class Transformer:
             ], css=style)
 
 
-def h_level(txt, m=3):
-    for i in range(m, 0, -1):
+def h_level(txt):
+    # the maximum heading level in (standard) markdown is 6
+    for i in range(6, 0, -1):
         if txt.startswith(i*'#'):
             return i
     return 0
+
+def max_level(src_file):
+       max_h_level = 0
+       with open(src_file, 'r', encoding='utf-8') as myfile:
+           for line in myfile:
+               h = h_level(line)
+               if h > max_h_level:
+                   max_h_level = h
+       return max_h_level
 
 def strip_answers(src_file, dst_file, lvl):
    out_file = open(dst_file, 'w', encoding='utf-8')
