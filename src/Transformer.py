@@ -127,7 +127,7 @@ class Transformer:
 
   def make_model(self, style):
         m_id = 1395453623
-        m_name = 'md2anki simple v1'
+        m_name = 'ankithon simple v1'
         if len(style) > 0:
             m_id = random.randrange(1 << 30, 1 << 31)
             m_name += ' (styled)'
