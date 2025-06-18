@@ -35,3 +35,12 @@ Yes it does!
 ![](img/image.png =10x)
 
 ![](img/image.png =60x20)
+
+### Bullet-Points?
+- Example A
+- Example B
+
+### Numbered Lists?
+1) Example A
+2) Example B
+3) Example C
