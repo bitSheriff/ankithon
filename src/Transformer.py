@@ -40,8 +40,12 @@ class Transformer:
 
     ccounter = 0
     card = Card()
-    card.domain[0] = '# ' + self.fbase
-    max_level = (src_file)
+    card.set_nth_domain(0, self.fbase)
+    max_level = get_max_level(src_file)
+    if max_level <= 1:
+        print("Max Level not enough; I needs one heading for the deck")
+        exit(2);
+
     with open(src_file, 'r', encoding='utf-8') as myfile:
       for line in myfile:
         h = h_level(line)
@@ -51,18 +55,19 @@ class Transformer:
 
           # setup new card
           card.level = h
-          card.domain[card.level-1] = line
+          if not h == max_level:
+            card.set_nth_domain(card.level-1, line)
           card.title = line
           card.txt = ''
 
-          if card.level == 2:
-            #print('New deck: '+deck_name)
+          if not card.level == max_level:
             card.lvl_id = 0
             if not self.deck == None:
               self.all_decks.append(self.deck)
             self.deck = genanki.Deck(
               random.randrange(1 << 30, 1 << 31),
               card.get_deck_name())
+            print(card.get_deck_name())
 
           if card.level == 3:
             card.lvl_id += 1
@@ -71,7 +76,7 @@ class Transformer:
         else:  # just text -> add to card
           card.txt += line
 
-      if card.level == 3 and ccounter > 0:  # make last card
+      if card.level == max_level and ccounter > 0:  # make last card
         self.md_make_card(card)
 
     self.all_decks.append(self.deck)
@@ -154,7 +159,7 @@ def h_level(txt):
             return i
     return 0
 
-def max_level(src_file):
+def get_max_level(src_file) -> int:
        max_h_level = 0
        with open(src_file, 'r', encoding='utf-8') as myfile:
            for line in myfile:
