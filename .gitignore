@@ -1,3 +1,4 @@
 /.vscode
 *.apkg
 src/__pycache__
+__pycache__
