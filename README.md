@@ -94,6 +94,9 @@ Another answer... _With an image!_
 1. Example A
 2. Example B
 3. Example C
+
+### Inline Math?
+$j^1 = -1$, yeah it works, but make sure that in Anki the LaTeX Rendering is set under Edit->Preferences->Review *Generate LaTeX Images*
 ```
 
 Into this:
