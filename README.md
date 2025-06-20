@@ -123,3 +123,8 @@ CSS can be added using the `-s PATH/TO/STYLE.css` parameter.
 CSS with the filename `style.css` in the same folder as the markdown file will be applied automatically.
 
 Most markdown CSS should work as expected. For example this [github markdown](https://github.com/sindresorhus/github-markdown-css).
+
+## Troubleshooting
+### LaTeX Math is not rendered in Anki
+This is due to a security issue, you have to enable it manually in the desktop app.
+Go to: Edit->Preferences->Review *Generate LaTeX Images*
