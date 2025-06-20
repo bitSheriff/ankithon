@@ -120,7 +120,7 @@ class Transformer:
 
 
     buff_ctxt += card.txt[buff:len(card.txt)]
-    card.txt = buff_ctxt
+    card.txt = transform_inline_math(buff_ctxt)
 
     self.deck.add_note(genanki.Note(
       model=self.model,
@@ -177,3 +177,16 @@ def strip_answers(src_file, dst_file, lvl):
         out_file.write(line + '\n')
     out_file.close()
 # re.sub(r'(?:!\[(.*?)\]\(((\S*/)\S*?)( =(\d*)x(\d)*)?\))', r'<img src="\4" width="\6" height="\7">', test)
+
+def transform_inline_math(markdown_text):
+    """
+    Transforms inline math expressions in Markdown into Anki-compatible format.
+
+    Args:
+        markdown_text (str): The Markdown text to process.
+
+    Returns:
+        str: The transformed Markdown text with inline math expressions wrapped in [latex] tags.
+    """
+    # Regex to match inline math expressions (LaTeX-style) surrounded by `$...$`
+    return re.sub(r'\$(.+?)\$', r'[latex]$\1$[/latex]', markdown_text)
