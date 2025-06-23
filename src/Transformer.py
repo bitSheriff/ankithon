@@ -52,6 +52,7 @@ class Transformer:
         if h > 0:  # new card start
           if card.level == max_level and ccounter > 0:  # make old card
             self.md_make_card(card)
+            ccounter += 1
 
           # setup new card
           card.level = h
@@ -68,11 +69,6 @@ class Transformer:
               random.randrange(1 << 30, 1 << 31),
               card.get_deck_name())
             print(card.get_deck_name())
-
-          if card.level == 3:
-            card.lvl_id += 1
-            ccounter += 1
-
         else:  # just text -> add to card
           card.txt += line
 
