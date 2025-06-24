@@ -50,7 +50,7 @@ class Transformer:
       for line in myfile:
         h = h_level(line)
         if h > 0:  # new card start
-          if card.level == max_level and ccounter > 0:  # make old card
+          if card.level == max_level:
             self.md_make_card(card)
             ccounter += 1
 
@@ -62,7 +62,6 @@ class Transformer:
           card.txt = ''
 
           if not card.level == max_level:
-            card.lvl_id = 0
             if not self.deck == None:
               self.all_decks.append(self.deck)
             self.deck = genanki.Deck(

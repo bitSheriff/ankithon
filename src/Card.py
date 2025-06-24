@@ -4,7 +4,6 @@ class Card:
   title = ''
   level = -1
   domain = ['', '', '', '', '', '']
-  lvl_id = 0
 
   def get_title_plain(self):
     return self.title[4:].strip()
