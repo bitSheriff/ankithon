@@ -117,6 +117,17 @@ An answer!
 
 The program will detect the lowest level, which is then taken as the *question*. All other levels will get turned into sub-decks. Please note that the heading where the question is has to be the same through the whole file. 
 
+### Anki Tags
+You can add tags in anki with a *markdown tag*
+```markdown
+# This is a Heading
+#aTag 
+this is a Tag because it does not have a space between the `#` and the name
+
+#tagA #tagB
+this should work too
+```
+
 ## CSS styling.
 
 CSS can be added using the `-s PATH/TO/STYLE.css` parameter.

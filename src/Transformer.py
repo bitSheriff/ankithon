@@ -4,6 +4,8 @@ import os
 from shutil import copyfile, rmtree
 import re
 from markdown2 import Markdown
+from itertools import chain
+
 
 from Card import Card
 
@@ -85,6 +87,8 @@ class Transformer:
         random.randrange(1 << 30, 1 << 31),
         card.get_deck_name())
 
+
+    local_tags = []
     buff = 0
     buff_ctxt = ''
     for img in re.finditer(r'(?:!\[(.*?)\]\((\S*)( =(\d*)x(\d*))?\))', card.txt):
@@ -115,10 +119,13 @@ class Transformer:
 
 
     buff_ctxt += card.txt[buff:len(card.txt)]
+    local_tags.append(get_tag_from_line(card.txt))
     card.txt = transform_inline_math(buff_ctxt)
+    flat = list(chain.from_iterable(local_tags))
 
     self.deck.add_note(genanki.Note(
       model=self.model,
+      tags=flat,
       fields=[
         self.markdowner.convert(card.get_title_md()).strip(),
         self.markdowner.convert(card.txt).strip()]))
@@ -148,9 +155,10 @@ class Transformer:
 
 
 def h_level(txt):
-    # the maximum heading level in (standard) markdown is 6
+    txt = txt.lstrip()  # Führende Leerzeichen entfernen
     for i in range(6, 0, -1):
-        if txt.startswith(i*'#'):
+        prefix = '#' * i
+        if txt.startswith(prefix) and (len(txt) == i or txt[i] == ' '):
             return i
     return 0
 
@@ -185,3 +193,7 @@ def transform_inline_math(markdown_text):
     """
     # Regex to match inline math expressions (LaTeX-style) surrounded by `$...$`
     return re.sub(r'\$(.+?)\$', r'[latex]$\1$[/latex]', markdown_text)
+
+def get_tag_from_line(line):
+    return re.findall(r'(?<!\S)#(?!\s)(\w+)', line)
+
