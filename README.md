@@ -16,6 +16,7 @@ This fork is powered by [python-markdown2](https://github.com/trentm/python-mark
     - Numbered Lists ...
 - Style flashcards with CSS
 - *Dynamic Sub-Decks*: the number of subdecks is dynamical -> the lowerst heading is the question, all above are levels of subdecks.
+- Tags
 
 ## Usage
 
