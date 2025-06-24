@@ -141,3 +141,5 @@ Most markdown CSS should work as expected. For example this [github markdown](ht
 ### LaTeX Math is not rendered in Anki
 This is due to a security issue, you have to enable it manually in the desktop app.
 Go to: Edit->Preferences->Review *Generate LaTeX Images*
+
+Then go to Tools->Check Media->Render LaTeX, this will process the LaTeX equations and renders them to a pictures which can be used on mobile devices
