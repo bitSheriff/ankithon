@@ -195,5 +195,10 @@ def transform_inline_math(markdown_text):
     return re.sub(r'\$(.+?)\$', r'[latex]$\1$[/latex]', markdown_text)
 
 def get_tag_from_line(line):
+    """
+    Get the tags if a line includes one or more
+    Tags are like `#tag1` (`#` without a space between, else it would be a heading)
+    Tags should be at the beginning of a line, not inside text
+    """
     return re.findall(r'(?<!\S)#(?!\s)(\w+)', line)
 

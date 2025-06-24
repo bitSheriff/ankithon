@@ -128,6 +128,7 @@ this is a Tag because it does not have a space between the `#` and the name
 #tagA #tagB
 this should work too
 ```
+Tags should be at the beginning of a line, and not inside of text, better at the end of the card's text.
 
 ## CSS styling.
 
