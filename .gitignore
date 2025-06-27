@@ -2,3 +2,4 @@
 *.apkg
 src/__pycache__
 __pycache__
+src/ankithon.egg-info
