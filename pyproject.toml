@@ -1,7 +1,7 @@
 [project]
 name = "ankithon"
-version = "0.1.0"
-description = "Add your description here"
+version = "0.1.1"
+description = "Convert your Markdown to Anki-Flashcards"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
