@@ -7,7 +7,7 @@ from markdown2 import Markdown
 from itertools import chain
 
 
-from Card import Card
+from src.Card import Card
 
 class Transformer:
   all_decks = []
