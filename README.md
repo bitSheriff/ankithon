@@ -20,6 +20,26 @@ This fork is powered by [python-markdown2](https://github.com/trentm/python-mark
 
 ## Usage
 
+### Using Nix
+
+You can run the script instantly without manually installing dependencies:
+
+```sh
+nix run github:bitSheriff/ankithon -- path/to/deck.md
+```
+
+Or build and run locally using the provided flake:
+
+```sh
+# Run the application instantly:
+nix run . -- path/to/deck.md
+
+# Build the wrapped Python script (outputs to ./result/bin/ankithon):
+nix build
+```
+
+### Using uv
+
 ```sh
 uv sync # one time to install the dependencies
 uv run main.py .\example\example.md
