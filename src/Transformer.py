@@ -35,6 +35,26 @@ class Transformer:
     self.package.write_to_file(dst_file)
     rmtree(self.mediadir)
 
+  def convert_markdown(self, text):
+    # Extract LaTeX blocks to prevent markdown parser from modifying them
+    math_blocks = []
+    def save_math(match):
+        math_blocks.append(match.group(0))
+        return f"MATHPLACEHOLDER{len(math_blocks)-1}"
+
+    # Replace math blocks (Anki LaTeX, MathJax inline, and MathJax block) with placeholders
+    text_placeholder = re.sub(r'\[latex\].*?\[/latex\]|\\\(.*?\\\)|\\\[.*?\\\]', save_math, text, flags=re.DOTALL)
+    
+    # Convert markdown
+    converted_html = self.markdowner.convert(text_placeholder).strip()
+    
+    # Restore LaTeX blocks
+    for i, block in enumerate(math_blocks):
+        converted_html = converted_html.replace(f"MATHPLACEHOLDER{i}", block)
+        
+    return converted_html
+
+
   def md_fill_deck(self, src_file):
 
     if not os.path.exists(self.mediadir):
@@ -73,8 +93,9 @@ class Transformer:
         else:  # just text -> add to card
           card.txt += line
 
-      if card.level == max_level and ccounter > 0:  # make last card
+      if card.level == max_level:  # make last card
         self.md_make_card(card)
+        ccounter += 1
 
     self.all_decks.append(self.deck)
     print('Added', ccounter, 'cards with',self.img_counter,'images in',len(self.all_decks),'decks.')
@@ -128,7 +149,7 @@ class Transformer:
       tags=flat,
       fields=[
         self.markdowner.convert(card.get_title_md()).strip(),
-        self.markdowner.convert(card.txt).strip()]))
+        self.convert_markdown(card.txt)]))
 
     # tags=[re.sub(r'#*','',cdomain[0]).strip().replace(' ','_'),re.sub(r'#*','',cdomain[1]).strip().replace(' ','_')])
 
@@ -182,17 +203,15 @@ def strip_answers(src_file, dst_file, lvl):
 # re.sub(r'(?:!\[(.*?)\]\(((\S*/)\S*?)( =(\d*)x(\d)*)?\))', r'<img src="\4" width="\6" height="\7">', test)
 
 def transform_inline_math(markdown_text):
+    r"""
+    Transforms inline math expressions ($...$) and block math ($$...$$)
+    in Markdown into Anki-compatible MathJax format (\(...\) and \[...\]).
     """
-    Transforms inline math expressions in Markdown into Anki-compatible format.
-
-    Args:
-        markdown_text (str): The Markdown text to process.
-
-    Returns:
-        str: The transformed Markdown text with inline math expressions wrapped in [latex] tags.
-    """
-    # Regex to match inline math expressions (LaTeX-style) surrounded by `$...$`
-    return re.sub(r'\$(.+?)\$', r'[latex]$\1$[/latex]', markdown_text)
+    # Convert block math $$...$$ to Anki MathJax \[...\]
+    markdown_text = re.sub(r'\$\$(.+?)\$\$', r'\[\1\]', markdown_text, flags=re.DOTALL)
+    # Convert inline math $...$ to Anki MathJax \(...\)
+    markdown_text = re.sub(r'\$(.+?)\$', r'\(\1\)', markdown_text)
+    return markdown_text
 
 def get_tag_from_line(line):
     """

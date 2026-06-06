@@ -23,3 +23,9 @@ Another answer... _With an image!_
 | This    | is | great!   |
 | This    | is | amazing! |
 | This    | is | ok!      |
+
+### Math?
+Yes it works
+$$
+A_b - B_b = C_b
+$$

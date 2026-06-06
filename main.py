@@ -41,7 +41,7 @@ def main():
     dst_file = fbase_dir + fbase + '_questions.md'
     if args.output is not None:
       dst_file = args.output
-    Transformer().strip_answers(src_file, dst_file, args.questions)
+    strip_answers(src_file, dst_file, args.questions)
     return
 
 
