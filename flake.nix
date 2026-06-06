@@ -37,6 +37,37 @@
           ];
         };
 
+        ankithon = python.pkgs.buildPythonApplication {
+          pname = "ankithon";
+          version = "0.1.0";
+          src = ./.;
+
+          format = "other";
+
+          propagatedBuildInputs = [
+            genanki
+            python.pkgs.markdown2
+          ];
+
+          dontBuild = true;
+
+          installPhase = ''
+            runHook preInstall
+            mkdir -p $out/bin
+            echo "#!/usr/bin/env python" > $out/bin/ankithon
+            cat main.py >> $out/bin/ankithon
+            cp -r src $out/bin/src
+            chmod +x $out/bin/ankithon
+            runHook postInstall
+          '';
+
+          meta = {
+            description = "Convert markdown documents to Anki flashcards";
+            homepage = "https://github.com/nx10/ankithon";
+            license = pkgs.lib.licenses.mit;
+          };
+        };
+
         ankithon-compiled =
           let
             libPath = pkgs.lib.makeLibraryPath [
@@ -80,9 +111,14 @@
           };
       in
       {
-        packages.default = ankithon-compiled;
+        packages.default = ankithon;
+        packages.compiled = ankithon-compiled;
 
         apps.default = {
+          type = "app";
+          program = "${ankithon}/bin/ankithon";
+        };
+        apps.compiled = {
           type = "app";
           program = "${ankithon-compiled}/bin/ankithon";
         };
