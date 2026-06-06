@@ -18,6 +18,9 @@
         pkgs = import nixpkgs { inherit system; };
         python = pkgs.python3;
 
+        pyproject = builtins.fromTOML (builtins.readFile ./pyproject.toml);
+        version = pyproject.project.version;
+
         # Package genanki custom as it is not in nixpkgs
         genanki = python.pkgs.buildPythonPackage rec {
           pname = "genanki";
@@ -39,7 +42,7 @@
 
         ankithon = python.pkgs.buildPythonApplication {
           pname = "ankithon";
-          version = "0.1.0";
+          inherit version;
           src = ./.;
 
           format = "other";
@@ -78,7 +81,7 @@
           in
           pkgs.stdenv.mkDerivation {
             pname = "ankithon-compiled";
-            version = "0.1.0";
+            inherit version;
             src = ./.;
 
             dontStrip = true;
