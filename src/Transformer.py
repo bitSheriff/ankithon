@@ -148,7 +148,7 @@ class Transformer:
       model=self.model,
       tags=flat,
       fields=[
-        self.markdowner.convert(card.get_title_md()).strip(),
+        self.convert_markdown(transform_inline_math(card.get_title_md())),
         self.convert_markdown(card.txt)]))
 
     # tags=[re.sub(r'#*','',cdomain[0]).strip().replace(' ','_'),re.sub(r'#*','',cdomain[1]).strip().replace(' ','_')])
@@ -209,8 +209,10 @@ def transform_inline_math(markdown_text):
     """
     # Convert block math $$...$$ to Anki MathJax \[...\]
     markdown_text = re.sub(r'\$\$(.+?)\$\$', r'\[\1\]', markdown_text, flags=re.DOTALL)
-    # Convert inline math $...$ to Anki MathJax \(...\)
-    markdown_text = re.sub(r'\$(.+?)\$', r'\(\1\)', markdown_text)
+    # Convert inline math $...$ to Anki MathJax \(...\) using Pandoc rules:
+    # opening $ needs a non-space to its right, closing $ a non-space to its
+    # left and no digit after it, so prices like "$5 and $10" stay plain text.
+    markdown_text = re.sub(r'(?<![\\$])\$(?!\s)([^$]+?)(?<![\s\\])\$(?!\d)', r'\(\1\)', markdown_text)
     return markdown_text
 
 def get_tag_from_line(line):
