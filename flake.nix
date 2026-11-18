@@ -112,6 +112,18 @@
                 --prefix LD_LIBRARY_PATH : "${libPath}"
             '';
           };
+        ankithon-tests = pkgs.writeShellApplication {
+          name = "ankithon-tests";
+          runtimeInputs = [
+            (python.withPackages (ps: [
+              genanki
+              ps.markdown2
+            ]))
+          ];
+          text = ''
+            exec python ${./.}/tests/run_tests.py ${./.}
+          '';
+        };
       in
       {
         packages.default = ankithon;
@@ -124,6 +136,10 @@
         apps.compiled = {
           type = "app";
           program = "${ankithon-compiled}/bin/ankithon";
+        };
+        apps.tests = {
+          type = "app";
+          program = "${ankithon-tests}/bin/ankithon-tests";
         };
 
         devShells.default = pkgs.mkShell {
